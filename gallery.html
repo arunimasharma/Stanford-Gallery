@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Stanford Gallery</title>
+<style>
+#caption {
+	position: absolute;
+	padding: 10px;
+	box-sizing: border-box;
+	color: white;
+	font-size: 14pt;
+	font-family: sans-serif;
+	background-color: #008800;
+	opacity: 0.5;
+	bottom: 0px;
+}
+
+#photoSection{
+	position: absolute;
+	width: 800px;
+	height: 600px;
+}
+
+#forwardOverlay{
+	position: absolute;
+    width: 50%;
+    height: 100%;
+    top:0px;
+    right: 0px;
+    opacity: 0.5;
+}
+
+#backwardOverlay{
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	opacity: 0.5;
+
+}
+
+</style>
+</head>
+<body onload="handleResize();" >
+<div id="photoSection">
+	<form id="picform">
+<img  id='photo' src='memchu.jpg' alt='photo' />
+<div id="caption">
+Stanford Memorial Church - the church used to have an 80' bell tower, which fell in the 1906 earthquake.
+</div>
+<div id="forwardOverlay" onclick="forwardpic();"></div>
+<div id="backwardOverlay" onclick="backwardpic();"></div>
+</form>
+</div>
+<script>
+"use strict";
+
+ window.addEventListener("resize", handleResize, false);
+
+ function handleResize(){
+ 	    var image = document.getElementById("photoSection");
+ 	    var width= window.innerWidth;
+ 	    var height= window.innerHeight;
+
+ 	        image.style.position="absolute";
+ 	        image.style.right=(width-800)/2+"px";
+ 	        image.style.left=(width-800)/2+"px";
+ 	        image.style.bottom=(height-600)/2+"px";
+ 	        image.style.top=(height-600)/2+"px";
+                                            }
+
+var photoArray = [
+		{filename: "memchu.jpg",
+		 caption: "Stanford Memorial Church - the church used to have an 80' bell tower, which fell in the 1906 earthquake."},
+		{filename: "quad.jpg", 
+		 caption: "The Stanford Quad"},
+		{filename: "hoop.jpg",
+		 caption: "The <i>Red Hoop Fountain</i> with Green Library in the background."},
+		{filename: "memorial-court.jpg",
+		 caption: "Memorial Court (in the front of the Quad) with Rodin's <i>Burghers of Calais</i> statues."},
+		{filename: "gates.jpg", 
+		 caption: "The Gates Building - home of Stanford Computer Science."},
+		{filename: "stone-river.jpg",
+		 caption: "The Stone River statue near the Cantor Arts Center (Stanford's own art museum)."},
+	];
+var for_num=0; 
+var back_num=5;
+
+function forwardpic (){
+	for_num = for_num + 1;
+	if (for_num>=photoArray.length){
+		for_num= 0;
+	}
+	picform.photo.src = photoArray[for_num].filename;
+	document.getElementById("caption").innerHTML= photoArray[for_num].caption;
+
+}
+
+console.log("Hello");
+console.log(forwardpic);
+
+function backwardpic(){
+	back_num = back_num - 1;
+	if(back_num<=0){
+		back_num= 5;
+	}
+	picform.photo.src = photoArray[back_num].filename;
+	document.getElementById("caption").innerHTML= photoArray[back_num].caption;
+}
+</script>
+</body>
+</html>
